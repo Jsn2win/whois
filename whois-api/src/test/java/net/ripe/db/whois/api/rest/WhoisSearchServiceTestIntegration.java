@@ -28,6 +28,7 @@ import org.glassfish.jersey.client.filter.EncodingFilter;
 import org.glassfish.jersey.message.DeflateEncoder;
 import org.glassfish.jersey.message.GZipEncoder;
 import org.junit.Before;
+import org.junit.Ignore;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -289,6 +290,42 @@ public class WhoisSearchServiceTestIntegration extends AbstractIntegrationTest {
         } catch (BadRequestException e) {
             RestTest.assertOnlyErrorMessage(e, "Error", "Disallowed search flag '%s'", "q");
         }
+    }
+
+    @Ignore
+    @Test
+    public void search_client_flag_with_version() {
+        databaseHelper.addObject("" +
+                "person:    Lo Person\n" +
+                "admin-c:   TP1-TEST\n" +
+                "tech-c:    TP1-TEST\n" +
+                "nic-hdl:   LP1-TEST\n" +
+                "mnt-by:    OWNER-MNT\n" +
+                "source:    TEST\n");
+
+        RestTest.target(getPort(), "whois/search?query-string=LP1-TEST&source=TEST&flags=Vtest")
+                .request(MediaType.APPLICATION_XML)
+                .get(WhoisResources.class);
+
+        // TODO: test client flag
+    }
+
+    @Ignore
+    @Test
+    public void search_client_flag_with_version_and_client_ip() {
+        databaseHelper.addObject("" +
+                "person:    Lo Person\n" +
+                "admin-c:   TP1-TEST\n" +
+                "tech-c:    TP1-TEST\n" +
+                "nic-hdl:   LP1-TEST\n" +
+                "mnt-by:    OWNER-MNT\n" +
+                "source:    TEST\n");
+
+        RestTest.target(getPort(), "whois/search?query-string=LP1-TEST&source=TEST&flags=Vtest,10.1.2.3")
+                .request(MediaType.APPLICATION_XML)
+                .get(WhoisResources.class);
+
+        // TODO: test client flag
     }
 
     @Test

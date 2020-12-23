@@ -39,7 +39,6 @@ import static net.ripe.db.whois.common.domain.CIString.ciString;
 import static net.ripe.db.whois.query.QueryFlag.ABUSE_CONTACT;
 import static net.ripe.db.whois.query.QueryFlag.ALL_SOURCES;
 import static net.ripe.db.whois.query.QueryFlag.BRIEF;
-import static net.ripe.db.whois.query.QueryFlag.CLIENT;
 import static net.ripe.db.whois.query.QueryFlag.DIFF_VERSIONS;
 import static net.ripe.db.whois.query.QueryFlag.FILTER_TAG_EXCLUDE;
 import static net.ripe.db.whois.query.QueryFlag.FILTER_TAG_INCLUDE;
@@ -77,7 +76,6 @@ public class WhoisSearchService {
             // flags that are covered by path/query params or other rest calls
             TEMPLATE,
             VERBOSE,
-            CLIENT,
             LIST_SOURCES,
             LIST_SOURCES_OR_VERSION,
             SOURCES,
